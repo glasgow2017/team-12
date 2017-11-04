@@ -1,5 +1,6 @@
 package com.test.glasgowteam12;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -105,9 +106,14 @@ public class RegisterActivity extends AppCompatActivity {
                 if(username.equals("")||email.equals("")||username.equals("")||password.equals("")||
                         passwordConfirm.equals("")||imHereForText.equals("")||whoIAmText.equals(""))
                 {
+
                     builder.setTitle("Something went wrong..");
                     builder.setMessage("Please fill all the fields...");
-                    builder.setCancelable(true);
+                    builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
                     builder.show();
 
                 }
@@ -118,7 +124,11 @@ public class RegisterActivity extends AppCompatActivity {
 
                         builder.setTitle("Something went wrong..");
                         builder.setMessage("Passwords does not match");
-                        builder.setCancelable(true);
+                        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
                         builder.show();
 
                     }
@@ -152,6 +162,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 params.put("email",email);
                                 params.put("phone",phone);
                                 params.put("password", password);
+                                params.put("imHereFor", imHereForText);
+                                params.put("whoIAm", whoIAmText);
 
                                 return params;
                             }

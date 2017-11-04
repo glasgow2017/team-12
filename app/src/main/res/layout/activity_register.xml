@@ -154,7 +154,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Choose Password" />
+            android:text="Confirm Password" />
 
         <EditText
             android:id="@+id/PasswordConfirm"
@@ -162,7 +162,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword"
-            android:hint="Re-enter password" />
+            android:hint="Re-Enter password" />
 
 
     </LinearLayout>
