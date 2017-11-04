@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.test.glasgowteam12.Activities.respondentCallView">
+
+    <Button
+        android:id="@+id/callBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_dark"
+        android:text="Call Back"
+        android:textAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="532dp" />
+
+    <Button
+        android:id="@+id/userMoodGraph"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_dark"
+        android:text="View Mood Graph"
+        android:textAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="80dp" />
+
+    <EditText
+        android:id="@+id/lineOfServiceTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Line of Service"
+        android:textAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/dashboard_graph"
+        android:layout_width="match_parent"
+        android:layout_height="124dp"
+        android:layout_below="@+id/mood_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="356dp" />
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/dashboard_graph"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_below="@+id/mood_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="154dp" />
+
+    <RatingBar
+        android:id="@+id/feedbackLikertScale"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="480dp" />
+
+    <Button
+        android:id="@+id/emergenceHistoryButton"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_dark"
+        android:text="View Emergence History"
+        android:textAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="279dp" />
+
+</android.support.constraint.ConstraintLayout>
