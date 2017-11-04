@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.test.glasgowteam12.Activities.respondentCallView">
+
+    <Button
+        android:id="@+id/callBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Call Back"
+        android:textAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
+        tools:layout_editor_absoluteX="123dp"
+        tools:layout_editor_absoluteY="522dp" />
+
+    <Button
+        android:id="@+id/moodGraph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Mood Graph"
+        android:textAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="421dp" />
+
+    <EditText
+        android:id="@+id/lineOfServiceTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Line of Service"
+        android:textAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
+        tools:layout_editor_absoluteX="73dp"
+        tools:layout_editor_absoluteY="61dp" />
+
+</android.support.constraint.ConstraintLayout>
