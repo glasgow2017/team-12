@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.test.glasgowteam12.R;
@@ -34,7 +35,7 @@ public class Dashboard extends AppCompatActivity {
 
         if (bundleExtras != null){
             int seekbarValue1 = bundleExtras.getInt("seekBarValue1");
-            System.out.println(seekbarValue1);
+            System.out.println("dashboard" + seekbarValue1);
         }
 
         /* Initialise graph of user mood points */
@@ -62,6 +63,7 @@ public class Dashboard extends AppCompatActivity {
         list.setAdapter(adapter);
         for (int i = 0; i < arrayList.size(); i++) {
             System.out.println(arrayList.get(i));
+            System.out.println("Hello");
         }
 
         adapter.notifyDataSetChanged();
