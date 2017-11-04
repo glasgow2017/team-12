@@ -12,6 +12,7 @@ import com.test.glasgowteam12.R;
 
 public class HomeScreenActivity extends AppCompatActivity {
 
+    Intent intent;
     TextView text_seekbar1;
     int currentValue;
     SeekBar seekbar1;
@@ -24,6 +25,8 @@ public class HomeScreenActivity extends AppCompatActivity {
 
         text_seekbar1 = (TextView) findViewById(R.id.text_seekBar1);
         seekbar1 = (SeekBar) findViewById(R.id.seekBar1);
+
+
 
         seekbar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -43,6 +46,7 @@ public class HomeScreenActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     // create an action bar button
@@ -59,7 +63,12 @@ public class HomeScreenActivity extends AppCompatActivity {
 
         if (id == R.id.dashboard_button) {
             // do something here
-            Intent intent = new Intent(HomeScreenActivity.this, Dashboard.class);
+
+
+            intent = new Intent(HomeScreenActivity.this, Dashboard.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("seekBarValue1", currentValue);
+            intent.putExtras(bundle);
             startActivity(intent);
 
         }
