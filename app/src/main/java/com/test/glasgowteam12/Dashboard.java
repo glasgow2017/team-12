@@ -15,8 +15,9 @@ import java.util.ArrayList;
 public class Dashboard extends AppCompatActivity {
 
     private ListView list;
+    private ArrayList<String> arrayList = new ArrayList<>();
+
     private ArrayAdapter<String> adapter;
-    private ArrayList<String> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,6 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         getSupportActionBar().setTitle("Dashboard");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
 
         /* Initialise graph of user mood points */
@@ -41,13 +41,30 @@ public class Dashboard extends AppCompatActivity {
 
         /*Add values to list view */
         list = (ListView) findViewById(R.id.dashboard_log_list);
-        arrayList = new ArrayList<String>();
-        //adapter = new ArrayAdapter<String>(getApplicationContext(), , arrayList);// this line adds the data of your EditText and puts in your array
+
+
+        // this line adds the data of your EditText and puts in your array
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
         arrayList.add("Mood:5");
         arrayList.add("Mood:8");
         arrayList.add("Mood:2");
-        //adapter.notifyDataSetChanged();
+        list.setAdapter(adapter);
+        for (int i = 0; i < arrayList.size(); i++) {
+            System.out.println(arrayList.get(i));
+        }
+
+        adapter.notifyDataSetChanged();
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
