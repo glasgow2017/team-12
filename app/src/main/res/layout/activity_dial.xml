@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.test.glasgowteam12.Activities.DialActivity">
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="100dp"
-        android:layout_height="92dp"
-
-        app:srcCompat="@android:color/holo_red_dark"
-        android:background="@android:drawable/ic_menu_call"
-        tools:layout_editor_absoluteX="39dp"
-        tools:layout_editor_absoluteY="36dp" />
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/a999"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 
 </android.support.constraint.ConstraintLayout>
