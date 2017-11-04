@@ -5,23 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.NetworkError;
-import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.test.glasgowteam12.NetworkSingleton;
 import com.test.glasgowteam12.R;
@@ -37,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
 
     String emailText;
     String passwordText;
-    AlertDialog.Builder builder;
     final String LOGIN_URL = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                                 {
                                     showAlert("Login failed", "Username and/or password is incorrect");
                                 }
-                                else
+                                else if(code.equals("login_success"))
                                 {
                                     // login succesful, show HomeScreen
                                     Intent intent = new Intent(LoginActivity.this ,HomeScreenActivity.class);
@@ -88,28 +79,8 @@ public class LoginActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            //Toast.makeText(LoginActivity.this, "Error",Toast.LENGTH_LONG).show();
-                            VolleyLog.e("Error: ", error.getMessage());
-                            Log.d("mytag", "error");
-                            error.printStackTrace();
+                            showAlert("Error", "Network error has occurred, check your connection");
 
-                            if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                                Toast.makeText(getApplicationContext(), "Communication Error!", Toast.LENGTH_SHORT).show();
-                                Log.d("mytag","communication error test");
-
-                            } else if (error instanceof AuthFailureError) {
-                                Toast.makeText(getApplicationContext(), "Authentication Error!", Toast.LENGTH_SHORT).show();
-                                Log.d("mytag","authentification");
-                            } else if (error instanceof ServerError) {
-                                Log.d("mytag","server error");
-                                Toast.makeText(getApplicationContext(), "Server Side Error!", Toast.LENGTH_SHORT).show();
-                            } else if (error instanceof NetworkError) {
-                                Log.d("mytag","networkerrpor");
-                                Toast.makeText(getApplicationContext(), "Network Error!", Toast.LENGTH_SHORT).show();
-                            } else if (error instanceof ParseError) {
-                                Log.d("mytag","parse error");
-                                Toast.makeText(getApplicationContext(), "Parse Error!", Toast.LENGTH_SHORT).show();
-                            }
                         }
                     })
                     {
@@ -133,6 +104,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     void showAlert(String title, String message){
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {

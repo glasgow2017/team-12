@@ -31,7 +31,6 @@ public class RegisterActivity extends AppCompatActivity {
     String imHereForText = "";
     String whoIAmText = "";
     final String REGISTER_URL = "";
-    AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,21 +101,11 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
 
-                builder = new AlertDialog.Builder(RegisterActivity.this);
-
-
                 if(username.equals("")||email.equals("")||username.equals("")||password.equals("")||
                         passwordConfirm.equals("")||imHereForText.equals("")||whoIAmText.equals(""))
                 {
 
-                    builder.setTitle("Something went wrong..");
-                    builder.setMessage("Please fill all the fields...");
-                    builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    builder.show();
+                    showAlert("Missing fields", "Some of the fields are missing");
 
                 }
                 else
@@ -124,28 +113,31 @@ public class RegisterActivity extends AppCompatActivity {
                     if(!password.equals(passwordConfirm))
                     {
 
-                        builder.setTitle("Something went wrong..");
-                        builder.setMessage("Passwords does not match");
-                        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        builder.show();
+                        showAlert("Failure", "Passwords do not match");
 
                     }
                     else
                     {
-                        // Make Network request and send received info
+                        // Make Network request and send info from inputs to register a person
                         StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
                                         try {
+                                            // get response from the server
                                             JSONArray jsonArray = new JSONArray(response);
                                             JSONObject jsonObject = jsonArray.getJSONObject(0);
                                             String code = jsonObject.getString("code");
-                                            String message = jsonObject.getString("message");
+
+                                            // check if register was successful
+                                            if(code.equals("register_success")){
+                                                // Registration successfull - show HomeScreen
+                                            } else if(code.equals("register_failed")){
+                                                // registration failed, show alert dialog
+
+                                                showAlert("Error", "Registration failed, please try again");
+                                            }
+
                                         } catch (JSONException e){
                                             e.printStackTrace();
                                         }
@@ -154,6 +146,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 }, new Response.ErrorListener(){
                             public void onErrorResponse(VolleyError error){
                                 error.printStackTrace();
+                                showAlert("Network Error", "Network error has occurred, please check your connection");
                             }
                         }){
                             @Override
@@ -181,5 +174,18 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    void showAlert(String title, String message){
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 }

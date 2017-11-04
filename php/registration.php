@@ -9,10 +9,7 @@ if (!mysqli_select_db ($con,'user_profiles')) {
  echo 'Database Not Selected';
 }
 session_start();
-// get JSON user registration data from Android app
-$user_registration_info = file_get_contents("php://input");
-
-// Extract relevant info to store in DB
+// Extract relevant info from input to store in DB
 $username = $_POST["username"];
 $phone_num = $_POST["phone"];
 $email = $_POST["email"];
