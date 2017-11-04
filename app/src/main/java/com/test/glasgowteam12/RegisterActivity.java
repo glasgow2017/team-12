@@ -1,26 +1,52 @@
 package com.test.glasgowteam12;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class RegisterActivity extends AppCompatActivity {
 
-    String imHereForText;
+    String imHereForText = "";
+    String whoIAmText = "";
+    final String REGISTER_URL = "";
+    AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-
-        Spinner whoAmIDropdown = (Spinner)findViewById(R.id.whoAmIDropdown);
-        Spinner imHereForDropdown = (Spinner)findViewById(R.id.imHereForDropdown);
-        String whoamiText = whoAmIDropdown.getSelectedItem().toString();
+        // Get UI objects
+        final Spinner whoAmIDropdown = (Spinner)findViewById(R.id.whoAmIDropdown);
+        final Spinner imHereForDropdown = (Spinner)findViewById(R.id.imHereForDropdown);
+        Button signUp = (Button)findViewById(R.id.signUp);
+        final EditText usernameEditText = (EditText)findViewById(R.id.UserName);
+        final EditText emailEditText = (EditText)findViewById(R.id.Email);
+        final EditText phoneNoEditText = (EditText)findViewById(R.id.PhoneNo);
+        final EditText passwordEditText = (EditText)findViewById(R.id.Password);
+        final EditText passwordConfirmEditText = (EditText)findViewById(R.id.PasswordConfirm);
         final EditText otherInput = (EditText)findViewById(R.id.other);
 
+
+        // Set Object Listeners
         imHereForDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -35,8 +61,111 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
+        whoAmIDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                whoIAmText = parent.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // get info from fields
+
+                final String username = usernameEditText.getText().toString();
+                final String email = emailEditText.getText().toString();
+                final String phone = phoneNoEditText.getText().toString();
+                final String password = passwordEditText.getText().toString();
+                final String passwordConfirm = passwordConfirmEditText.getText().toString();
+
+
+                /** if imHereForDropdown was not changed, get it's initial value to a text variable,
+                 *  if "other" was selected, set imHereForText to the text they have inputed in the input provided
+                 * */
+                if(imHereForText.equals("")){
+                    imHereForText = imHereForDropdown.getSelectedItem().toString();
+                } else if(imHereForText.equals("other")) {
+                    imHereForText = otherInput.getText().toString();
+                }
+
+
+                builder = new AlertDialog.Builder(RegisterActivity.this);
+
+
+                if(username.equals("")||email.equals("")||username.equals("")||password.equals("")||
+                        passwordConfirm.equals("")||imHereForText.equals("")||whoIAmText.equals(""))
+                {
+                    builder.setTitle("Something went wrong..");
+                    builder.setMessage("Please fill all the fields...");
+                    builder.setCancelable(true);
+                    builder.show();
+
+                }
+                else
+                {
+                    if(!password.equals(passwordConfirm))
+                    {
+
+                        builder.setTitle("Something went wrong..");
+                        builder.setMessage("Passwords does not match");
+                        builder.setCancelable(true);
+                        builder.show();
+
+                    }
+                    else
+                    {
+                        // Make Network request and send received info
+                        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
+                                new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        try {
+                                            JSONArray jsonArray = new JSONArray(response);
+                                            JSONObject jsonObject = jsonArray.getJSONObject(0);
+                                            String code = jsonObject.getString("code");
+                                            String message = jsonObject.getString("message");
+                                        } catch (JSONException e){
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+                                }, new Response.ErrorListener(){
+                            public void onErrorResponse(VolleyError error){
+                                error.printStackTrace();
+                            }
+                        }){
+                            @Override
+                            protected Map<String, String> getParams() throws AuthFailureError {
+                                Map<String,String>params = new HashMap<String, String>();
+
+                                params.put("username",username);
+                                params.put("email",email);
+                                params.put("phone",phone);
+                                params.put("password", password);
+
+                                return params;
+                            }
+                        };
+                        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                                5000,
+                                5,
+                                5));
+                        NetworkSingleton.getInstance(RegisterActivity.this).addToRequestque(stringRequest);
+                    }
+                }
+            }
+        });
+
+
     }
 }

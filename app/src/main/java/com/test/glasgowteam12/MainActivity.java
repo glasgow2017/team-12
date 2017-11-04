@@ -8,10 +8,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
+        setContentView(R.layout.activity_main);
 
-
-
+        // Open another activity for testing purposes
+        /*
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);*/
     }
 
 }
