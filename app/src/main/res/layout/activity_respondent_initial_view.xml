@@ -20,16 +20,25 @@
         app:layout_constraintVertical_bias="0.072" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:id="@+id/groupDiscussionButton"
+        android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:text="View Group Discussion"
         android:textAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Availability" />
+        app:layout_constraintTop_toBottomOf="@+id/Availability"
+        app:layout_constraintVertical_bias="0.201" />
+
+    <Button
+        android:id="@+id/newsfeedButton"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:text="View Newsfeed"
+        android:textAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="379dp" />
 
 
 </android.support.constraint.ConstraintLayout>
