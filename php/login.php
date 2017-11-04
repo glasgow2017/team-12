@@ -1,10 +1,11 @@
 <?php 
-$con = mysqli_connect('localhost','user','password', 'user_profiles');
+require_once('config.php');
+$con = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
 
 if(!$con){
  echo 'Not Connected To Server';
 }
-if (!mysqli_select_db ($con,'user_profiles')) {
+if (!mysqli_select_db ($con,DATABASE)) {
  echo 'Database Not Selected';
 }
 $response = array();
@@ -17,7 +18,7 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 
 // Check user profile DB-if unique user profile present then retrieve associated data
-$sql_usercheck = mysqli_prepare($con, "SELECT userID FROM user_profile WHERE email='?' AND password='?");
+$sql_usercheck = mysqli_prepare($con, "SELECT userID FROM user_profiles WHERE email='?' AND password='?");
 mysqli_stmt_bind_param($sql_usercheck,"ss", $email, $password);
 
 if ($result = mysqli_query($link, $query)) {
