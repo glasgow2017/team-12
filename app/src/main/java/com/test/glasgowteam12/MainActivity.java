@@ -1,6 +1,5 @@
 package com.test.glasgowteam12;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -11,8 +10,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Open another activity for testing purposes
+        /*
         Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
+        startActivity(intent);*/
     }
 
 }
