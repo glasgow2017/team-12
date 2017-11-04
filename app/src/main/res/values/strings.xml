@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GlasgowTeam12</string>
+    <string name="logo_of_the_charity">Logo of the charity</string>
+    <string name="please_enter_your_email_address">Please Enter Your Email Address:</string>
 </resources>
