@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.test.glasgowteam12.Dashboard;
 import com.test.glasgowteam12.R;
 
 public class HomeScreenActivity extends AppCompatActivity {
