@@ -1,10 +1,10 @@
-package com.test.glasgowteam12;
+package com.test.glasgowteam12.Activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import com.test.glasgowteam12.R;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -21,6 +21,7 @@ public class Dashboard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_dashboard);
         getSupportActionBar().setTitle("Dashboard");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

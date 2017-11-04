@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:label="@string/dashboard_name"
     android:title="@string/dashboard_name"
-    tools:context="com.test.glasgowteam12.Dashboard"
+    tools:context="com.test.glasgowteam12.Activities.Dashboard"
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
 
