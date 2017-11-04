@@ -6,4 +6,6 @@
     <string name="dashboard_name">Dashboard</string>
     <string name="mood_title">Mood over Time</string>
     <string name="log_title">Recent mood changes</string>
+    <string name="title_activity_dealactivity">dealactivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>
