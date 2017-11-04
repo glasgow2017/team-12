@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="who_am_i_array">
+        <item>Person In Need</item>
+        <item>Volunteer Helper</item>
+        <item>Family Member</item>
+    </string-array>
+</resources>
