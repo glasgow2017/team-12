@@ -20,7 +20,7 @@
 
     <ImageView
         android:id="@+id/Logo"
-        android:layout_width="249dp"
+        android:layout_width="269dp"
         android:layout_height="294dp"
         android:background="@mipmap/who_dares_cares_scio_4"
         android:contentDescription="Logo of the charity"
