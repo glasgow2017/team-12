@@ -1,5 +1,6 @@
 package com.test.glasgowteam12;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -26,6 +27,13 @@ public class Dashboard extends AppCompatActivity {
         getSupportActionBar().setTitle("Dashboard");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Intent intentExtras = getIntent();
+        Bundle bundleExtras = intentExtras.getExtras();
+
+        if (bundleExtras != null){
+            int seekbarValue1 = bundleExtras.getInt("seekBarValue1");
+            System.out.println(seekbarValue1);
+        }
 
         /* Initialise graph of user mood points */
         /* TODO:  pull in external data for moods associated with user */
