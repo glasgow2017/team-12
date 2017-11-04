@@ -2,6 +2,7 @@ package com.test.glasgowteam12;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -21,7 +22,10 @@ public class Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        getActionBar().setTitle("Dashboard");
+        getSupportActionBar().setTitle("Dashboard");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
         /* Initialise graph of user mood points */
         /* TODO:  pull in external data for moods associated with user */
@@ -42,7 +46,8 @@ public class Dashboard extends AppCompatActivity {
         arrayList.add("Mood:5");
         arrayList.add("Mood:8");
         arrayList.add("Mood:2");
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
 
     }
+
 }
