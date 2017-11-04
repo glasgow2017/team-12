@@ -1,6 +1,6 @@
 <?php 
 /*require_once('config.php');*/
-$con = mysqli_connect('localhost','root','password', 'testdb');
+$con = mysqli_connect('localhost','user','password', 'user_profiles');
 
 if(!$con){
  echo 'Not Connected To Server';
@@ -14,14 +14,19 @@ session_start();
 $user_registration_info = file_get_contents("php://input");
 
 // Extract relevant info to store in DB
-$username = 'x';
-$phone_num = '78594650265';
-$email = '';
-$service_affiliation = '';
-$experience = '';
+$username = $user_registration_info["username"];
+$phone_num = $user_registration_info["phone"];
+$email = $user_registration_info["email"];
+$password = $user_registration_info["password"];
+$service_affiliation = 
+$here_for = $user_registration_info['imHereFor'];
 
-// username, email, phone, password -JSON format
-
-
-
+// Update user profile DB
+$sql_userprofile = mysqli_prepare($con, "INSERT INTO user_profile (username, phone_number, service_affiliation, experience, email, password) VALUES (?, ?, ?, ?, ?, ?)");
+mysqli_stmt_bind_param($sql_userprofile,"sssss", $username, $phone_num, $pickupcity, $service_affiliation, $experience, $email, $password);
+$successful_update = mysqli_stmt_execute($sql_userprofile);
+if (!$successful_update) {
+    echo 'User registration not successful';
+}
+mysqli_stmt_close($sql_userprofile);
 ?>
