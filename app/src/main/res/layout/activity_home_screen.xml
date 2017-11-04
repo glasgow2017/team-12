@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:background="#FFFFFF"
         android:orientation="vertical"
-        tools:context="com.test.glasgowteam12.MainActivity">
+        tools:context="com.test.glasgowteam12.Activities.MainActivity">
 
 
     <TextView

@@ -1,4 +1,4 @@
-package com.test.glasgowteam12;
+package com.test.glasgowteam12.Activities;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -16,6 +16,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.test.glasgowteam12.NetworkSingleton;
+import com.test.glasgowteam12.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
