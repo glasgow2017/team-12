@@ -5,7 +5,7 @@ $con = mysqli_connect('localhost','user','password', 'user_profiles');
 if(!$con){
  echo 'Not Connected To Server';
 }
-if (!mysqli_select_db ($con,'testdb')) {
+if (!mysqli_select_db ($con,'user_profiles')) {
  echo 'Database Not Selected';
 }
 
@@ -31,7 +31,7 @@ if ($count > 0){
 else {
     // Update user profile DB
     $sql_userprofile = mysqli_prepare($con, "INSERT INTO user_profile (username, phone_number, service_affiliation, experience, email, password) VALUES (?, ?, ?, ?, ?, ?)");
-    mysqli_stmt_bind_param($sql_userprofile,"sssss", $username, $phone_num, $pickupcity, $service_affiliation, $experience, $email, $password);
+    mysqli_stmt_bind_param($sql_userprofile,"sssss", $username, $phone_num, $pickupcity, $who_i_am, $here_for, $email, $password);
     $successful_update = mysqli_stmt_execute($sql_userprofile);
     if (!$successful_update) {
         echo 'User registration not successful';
