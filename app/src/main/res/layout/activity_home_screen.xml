@@ -9,13 +9,6 @@
         tools:context="com.test.glasgowteam12.Activities.MainActivity">
 
 
-    <Button
-        android:id="@+id/dashboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="Dashboard" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"

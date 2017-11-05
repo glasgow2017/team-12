@@ -118,10 +118,12 @@ public class Dashboard extends AppCompatActivity {
         */
 
         /*Add values to list view */
+        /*
         list = (ListView) findViewById(R.id.dashboard_log_list);
         String  arr[]={"Saturday's mood: 8 ","Friday's mood: 5","Friday's mood: 4","Thursday's mood: 6"};
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(getApplicationContext(), R.layout.listview_textdark, arr);
         list.setAdapter(adapter);
+        */
 
 
         // this line adds the data of your EditText and puts in your array

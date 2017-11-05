@@ -13,25 +13,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.test.glasgowteam12.NetworkSingleton;
 import com.test.glasgowteam12.R;
 import com.test.glasgowteam12.User;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class HomeScreenActivity extends AppCompatActivity {
 
@@ -50,14 +37,15 @@ public class HomeScreenActivity extends AppCompatActivity {
 
         user = (User)getIntent().getSerializableExtra("user");
 
-        Button dashboard = (Button)findViewById(R.id.dashboard);
+        // button was added to toolbar
+/*        Button dashboard = (Button)findViewById(R.id.dashboard);
         dashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeScreenActivity.this, Dashboard.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
 
         Button helpButton = (Button)findViewById(R.id.HelpButton);
@@ -112,8 +100,9 @@ public class HomeScreenActivity extends AppCompatActivity {
                 if(currentValue == -1){
                     showToast("You haven't set your mood");
                 }else{
-
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_MOOD_URL, new Response.Listener<String>() {
+                    showToast("Your mood has been submitted!");
+                    //HTTP not working, using dummy data
+                    /*StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_MOOD_URL, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             try {
@@ -156,7 +145,7 @@ public class HomeScreenActivity extends AppCompatActivity {
                             5,
                             5));
 
-                    NetworkSingleton.getInstance(HomeScreenActivity.this).addToRequestque(stringRequest); // checks if there is a queue, if there is, puts request to it
+                    NetworkSingleton.getInstance(HomeScreenActivity.this).addToRequestque(stringRequest); // checks if there is a queue, if there is, puts request to it*/
                 }
             }
         });
