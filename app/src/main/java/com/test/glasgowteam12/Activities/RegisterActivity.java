@@ -9,22 +9,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.test.glasgowteam12.NetworkSingleton;
 import com.test.glasgowteam12.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -118,6 +105,14 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     else
                     {
+
+                        //TODO Because of bugs with database we are removing HTTP request and replacing it with dummy data
+                        // start of dummy data
+
+                        showToast("Succesfully registered");
+
+                        ///End of dummy data
+                        /*
                         // Make Network request and send info from inputs to register a person
                         StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
                                 new Response.Listener<String>() {
@@ -168,6 +163,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 5,
                                 5));
                         NetworkSingleton.getInstance(RegisterActivity.this).addToRequestque(stringRequest);
+                    */
                     }
                 }
             }
@@ -187,5 +183,10 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    void showToast(String message){
+        Toast.makeText(this, message,
+                Toast.LENGTH_LONG).show();
     }
 }

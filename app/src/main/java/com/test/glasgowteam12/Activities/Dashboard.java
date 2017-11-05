@@ -7,19 +7,10 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-import com.test.glasgowteam12.NetworkSingleton;
 import com.test.glasgowteam12.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -50,7 +41,27 @@ public class Dashboard extends AppCompatActivity {
 
         final GraphView graph = (GraphView) findViewById(R.id.dashboard_graph);
 
+
+        //TODO because of server problems feed in dummy data instead of HTTP request
+
+        //// Beginning Dummy data
+
+
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
+                new DataPoint(20170204, 5),
+                new DataPoint(20170205, 2),
+                new DataPoint(20170206, 8),
+                new DataPoint(20170207, 3),
+                new DataPoint(20170208, 2),
+                new DataPoint(201702030, 1),
+        });
+        graph.addSeries(series);
+
+        ///End dummy data
+
         /* pull in external data for moods associated with user */
+
+        /*
         JsonArrayRequest dataPointsRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 FetchGraphPoints_URL,
@@ -79,7 +90,7 @@ public class Dashboard extends AppCompatActivity {
                             }
 
 
-                            /* Initialise graph of user mood points */
+                            /* Initialise graph of user mood points */ /*
 
                             LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPointsArray);
                             graph.addSeries(series);
@@ -98,7 +109,7 @@ public class Dashboard extends AppCompatActivity {
                 }
         );
         NetworkSingleton.getInstance(Dashboard.this).addToRequestque(dataPointsRequest); // checks if there is a queue, if there is, puts request to it
-
+        */
 
         /*Add values to list view */
         list = (ListView) findViewById(R.id.dashboard_log_list);

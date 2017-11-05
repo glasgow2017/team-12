@@ -75,15 +75,33 @@ public class RespondentCallWait extends AppCompatActivity {
                 // check if respondent is online
                 if(online){
                     // Start listening for calls
+
+                    // TODO because of unknows error in the library "snitch" we are using we cant import it and so I have moved jniLibs
+                    // TODO from src/main where they should be to be compiled to src/main/java and I will comment out the code that uses it
+
+                    /*
                     sinchClient.startListeningOnActiveConnection();
                     sinchClient.start();
                     sinchClient.getCallClient().addCallClientListener(new SinchCallClientListener(RespondentCallWait.this, "respondent"));
+                    */
 
                     // tell database, that this person is now online
-                    changePersonStatusOnline(email, true);
+                    //TODO because of server problems feed in dummy data instead of HTTP request
+                    ///Start of Dummy data
+
+                    // end of dummy data
+                    if(isChecked){
+                        showToast("Online");
+                    }else{
+                        showToast("Offline");
+                    }
+
+
+                   /* changePersonStatusOnline(email, true);*/
 
 
                 } else{
+
                     if(sinchClient.isStarted()){
                         // if sinch client was started - destroy it
                         sinchClient.stopListeningOnActiveConnection();
@@ -115,7 +133,7 @@ public class RespondentCallWait extends AppCompatActivity {
 
                             // check if setting online was successful
                             if(code.equals("success")){
-                                // Registration successfull - show HomeScreen
+                                // set online succesfully
                             } else if(code.equals("failure")){
                                 // going online failed, show toast
                                 showToast("Going online failed");
@@ -151,10 +169,8 @@ public class RespondentCallWait extends AppCompatActivity {
     }
 
     void showToast(String message){
-        Toast toast = new Toast(RespondentCallWait.this);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setText(message);
-        toast.show();
+        Toast.makeText(this, message,
+                Toast.LENGTH_LONG).show();
     }
 
 

@@ -11,27 +11,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.sinch.android.rtc.Sinch;
 import com.sinch.android.rtc.SinchClient;
 import com.sinch.android.rtc.calling.Call;
 import com.test.glasgowteam12.CONSTANTS;
-import com.test.glasgowteam12.NetworkSingleton;
 import com.test.glasgowteam12.R;
 import com.test.glasgowteam12.Respondent;
 import com.test.glasgowteam12.SinchCallListener;
 import com.test.glasgowteam12.User;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class UserCallActivity extends AppCompatActivity {
 
@@ -59,7 +48,11 @@ public class UserCallActivity extends AppCompatActivity {
         sinchClient.start();
 
         // parse online helpers list
+        //TODO because of server problems feed in dummy data instead of HTTP request
 
+        sinchClient.getCallClient().callUser("dummy@dummy");
+
+        /*
 
         JsonArrayRequest dataPointsRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -137,7 +130,7 @@ public class UserCallActivity extends AppCompatActivity {
                 }
         );
         NetworkSingleton.getInstance(UserCallActivity.this).addToRequestque(dataPointsRequest); // checks if there is a queue, if there is, puts request to it
-
+*/
 
 
 
@@ -161,10 +154,8 @@ public class UserCallActivity extends AppCompatActivity {
     }
 
     void showToast(String message){
-        Toast toast = new Toast(UserCallActivity.this);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setText(message);
-        toast.show();
+        Toast.makeText(this, message,
+                Toast.LENGTH_LONG).show();
     }
 
 
