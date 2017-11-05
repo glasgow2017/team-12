@@ -2,7 +2,20 @@
 <resources>
     <string-array name="im_here_for_array">
         <item>I experience flashbacks from the past</item>
-        <item>Looking for advice on a family member</item>
+        <item> Victim of Rape </item>
+        <item>Victim of Sexual Molestation</item>
+        <item>Army Veteran</item>
+        <item>Witnessed severe injury or death</item>
+        <item>Was Threatened with a Weapon</item>
+        <item>Victim of Serious Motor Vehicle Accident</item>
+        <item>Victory of Robbery or Hold up</item>
+        <item>Victim of Physical Attack </item>
+        <item>Violent Death of a Friend or a Family Member</item>
+        <item>Victim of a Natural Disaster</item>
+        <item>Victim/ Eyewitness of Terorist Attack</item>
+        <item>Being Held Hostage</item>
+        <item>A Diagnosis with a Life-Threatening Condition</item>
         <item>other</item>
+
     </string-array>
 </resources>
