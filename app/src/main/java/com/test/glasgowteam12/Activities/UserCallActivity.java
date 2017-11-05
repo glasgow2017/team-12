@@ -21,6 +21,7 @@ import com.sinch.android.rtc.calling.Call;
 import com.test.glasgowteam12.CONSTANTS;
 import com.test.glasgowteam12.NetworkSingleton;
 import com.test.glasgowteam12.R;
+import com.test.glasgowteam12.Respondent;
 import com.test.glasgowteam12.SinchCallListener;
 import com.test.glasgowteam12.User;
 
@@ -29,13 +30,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class UserCallActivity extends AppCompatActivity {
 
     private Call call;
     User user;
     final String PARSE_ONLINE_RESPONDENTS_LIST_URL = "";
-    ArrayList<User> respondents;
+    ArrayList<Respondent> respondents;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,25 +84,44 @@ public class UserCallActivity extends AppCompatActivity {
                                 String respEmail = respondent.getString("email");
                                 String name = respondent.getString("name");
 
-                                User resp = new User(name, respEmail, experience, service);
+                                Respondent resp = new Respondent(name, respEmail, experience, service);
                                 respondents.add(resp);
                             }
 
                             // The list of respondents was downloaded, now do sorting
                             // create a copy for sorting in case we need to revert changes
-                            ArrayList<User> listForSorting = new ArrayList<>(respondents);
-                            for(User resp: listForSorting){
+                            ArrayList<Respondent> listForSorting = new ArrayList<>(respondents);
+                            Respondent ChosenResp;
+                            for(Respondent resp: listForSorting){
 
                                 // remove respondents from other services
                                 if(!resp.getService().equals(user.getService())){
                                     listForSorting.remove(resp);
                                 }
-
-                                // check if there are respondents left
-                                if(listForSorting.size()>0){
-
-                                }
                             }
+
+                            // check if there are respondents left after sorting
+                            if(listForSorting.size()>0){
+                                //TODO: from remaining respondents choose one with enough experience for the demand level
+                                // (For now just choose the first one from the list)
+                                ChosenResp = listForSorting.get(0);
+                            } else if(listForSorting.size() == 1){
+                                // Only one respondent left so grab his info for connecting to him
+                                ChosenResp = listForSorting.get(0);
+                            } else {
+                                // No respondents left, so just choose a guy with a high level of experience from any service
+                                Collections.sort(respondents, new Comparator<Respondent>() {
+                                    public int compare(Respondent o1, Respondent o2) {
+                                        return o1.getExperience().compareTo(o2.getExperience());
+                                    }
+                                });
+
+                                ChosenResp = respondents.get(0);
+                            }
+
+
+                            // Since we have our chosenRespondent - connect to him
+                            sinchClient.getCallClient().callUser(ChosenResp.getEmail());
 
 
                         }catch (JSONException e){
@@ -117,10 +139,6 @@ public class UserCallActivity extends AppCompatActivity {
         NetworkSingleton.getInstance(UserCallActivity.this).addToRequestque(dataPointsRequest); // checks if there is a queue, if there is, puts request to it
 
 
-
-        // Algorithm to find a best person's id to call
-
-        sinchClient.getCallClient().callUser("call-recipient-id");
 
 
 

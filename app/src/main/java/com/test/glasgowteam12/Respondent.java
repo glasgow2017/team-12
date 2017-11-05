@@ -20,6 +20,38 @@ public class Respondent implements Comparable<Respondent>{
         this.service = service;
     }
 
+    public static String getName() {
+        return name;
+    }
+
+    public static void setName(String name) {
+        Respondent.name = name;
+    }
+
+    public static String getEmail() {
+        return email;
+    }
+
+    public static void setEmail(String email) {
+        Respondent.email = email;
+    }
+
+    public static String getExperience() {
+        return experience;
+    }
+
+    public static void setExperience(String experience) {
+        Respondent.experience = experience;
+    }
+
+    public static String getService() {
+        return service;
+    }
+
+    public static void setService(String service) {
+        Respondent.service = service;
+    }
+
     @Override
     public int compareTo(@NonNull Respondent r) {
         return Integer.parseInt(this.experience) -Integer.parseInt(r.experience) ;
