@@ -5,6 +5,7 @@
 
 package com.test.glasgowteam12.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -25,10 +26,13 @@ public class UserCallActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_call);
 
+        Intent intent = new Intent();
+        String email = intent.getExtras().getString("email");
+
         // Create Client for calling
         final SinchClient sinchClient = Sinch.getSinchClientBuilder()
                 .context(this)
-                .userId("current-user-id")
+                .userId("email")
                 .applicationKey(CONSTANTS.SnichKey)
                 .applicationSecret(CONSTANTS.SnichSecret)
                 .environmentHost("clientapi.sinch.com")

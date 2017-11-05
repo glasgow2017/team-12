@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
                                 String code = jsonObject.getString("code");
+                                String userType = jsonObject.getString("userType");
 
                                 // login failed, show dialog
                                 if(code.equals("login_failed"))
@@ -67,9 +68,17 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                                 else if(code.equals("login_success"))
                                 {
-                                    // login succesful, show HomeScreen
-                                    Intent intent = new Intent(LoginActivity.this ,HomeScreenActivity.class);
-                                    startActivity(intent);
+                                    if (userType.equals("user")) {
+                                        // login succesful, show HomeScreen
+                                        Intent intent = new Intent(LoginActivity.this ,HomeScreenActivity.class);
+                                        intent.putExtra("email", emailText);
+                                        startActivity(intent);
+                                    } else {
+                                        Intent intent = new Intent(LoginActivity.this ,RespondentCallActivity.class);
+                                        intent.putExtra("email", emailText);
+                                        startActivity(intent);
+                                    }
+
                                 }
                             } catch (JSONException e){
                                 e.printStackTrace();

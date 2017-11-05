@@ -7,6 +7,15 @@
     tools:context="com.test.glasgowteam12.Activities.RespondentCallWait">
 
 
+
+    <Switch
+        android:id="@+id/online"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="I am ready to Help" />
+
+
     <Button
         android:id="@+id/endCall"
         android:layout_width="wrap_content"

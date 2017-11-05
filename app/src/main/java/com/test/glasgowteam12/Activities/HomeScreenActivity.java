@@ -50,6 +50,18 @@ public class HomeScreenActivity extends AppCompatActivity {
         Bundle bundleExtras = intentExtras.getExtras();
         final String email = bundleExtras.getString("email");
 
+
+        Button helpButton = (Button)findViewById(R.id.HelpButton);
+
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreenActivity.this, UserCallActivity.class);
+                intent.putExtra("email", email);
+                startActivity(intent);
+            }
+        });
+
         text_seekbar1 = (TextView) findViewById(R.id.text_seekBar1);
         seekbar1 = (SeekBar) findViewById(R.id.seekBar1);
 
