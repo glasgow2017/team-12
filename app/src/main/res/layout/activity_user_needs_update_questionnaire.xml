@@ -174,4 +174,46 @@
         tools:layout_editor_absoluteX="214dp"
         tools:layout_editor_absoluteY="346dp" />
 
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="378dp" />
+
+    <RadioButton
+        android:id="@+id/line 5 button 1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="423dp" />
+
+    <RadioButton
+        android:id="@+id/line 5 button 2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2"
+        tools:layout_editor_absoluteX="88dp"
+        tools:layout_editor_absoluteY="423dp" />
+
+    <RadioButton
+        android:id="@+id/line 5 button 3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        tools:layout_editor_absoluteX="150dp"
+        tools:layout_editor_absoluteY="423dp" />
+
+    <RadioButton
+        android:id="@+id/line 5 button 4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4"
+        tools:layout_editor_absoluteX="223dp"
+        tools:layout_editor_absoluteY="423dp" />
+
 </android.support.constraint.ConstraintLayout>
