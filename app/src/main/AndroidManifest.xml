@@ -22,7 +22,8 @@
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.InitialActivity" />
         <activity android:name=".Activities.respondentInitialView" />
-        <activity android:name=".Activities.respondentCallView"></activity>
+        <activity android:name=".Activities.respondentCallView" />
+        <activity android:name=".Activities.UserNeedsUpdateQuestionnaire"></activity>
     </application>
 
 </manifest>
