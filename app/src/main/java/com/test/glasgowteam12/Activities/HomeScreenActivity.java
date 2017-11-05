@@ -13,12 +13,25 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.test.glasgowteam12.NetworkSingleton;
 import com.test.glasgowteam12.R;
 import com.test.glasgowteam12.User;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomeScreenActivity extends AppCompatActivity {
 
@@ -36,13 +49,15 @@ public class HomeScreenActivity extends AppCompatActivity {
 
 
         user = (User)getIntent().getSerializableExtra("user");
-        /*
-        Bundle bundleExtras = intentExtras.getExtras();
-        final String email = bundleExtras.getString("email");
-        final String hereFor = bundleExtras.getString("hereFor");
-        final String service = bundleExtras.getString("service");
-        */
 
+        Button dashboard = (Button)findViewById(R.id.dashboard);
+        dashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreenActivity.this, Dashboard.class);
+                startActivity(intent);
+            }
+        });
 
 
         Button helpButton = (Button)findViewById(R.id.HelpButton);
@@ -50,15 +65,9 @@ public class HomeScreenActivity extends AppCompatActivity {
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeScreenActivity.this, UserCallActivity.class);
+                Intent intent = new Intent(HomeScreenActivity.this, DialActivity.class);
                 intent.putExtra("user", user);
 
-
-                /*
-                intent.putExtra("email", email);
-                intent.putExtra("hereFor", email);
-                intent.putExtra("service", email);
-                */
                 startActivity(intent);
             }
         });
@@ -103,13 +112,7 @@ public class HomeScreenActivity extends AppCompatActivity {
                 if(currentValue == -1){
                     showToast("You haven't set your mood");
                 }else{
-                    //TODO because of server problems feed in dummy data instead of HTTP request
 
-                    //// Beginning Dummy data
-                    showToast("Your mood has been saved");
-                    ///End dummy data
-
-                    /*
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_MOOD_URL, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -154,7 +157,6 @@ public class HomeScreenActivity extends AppCompatActivity {
                             5));
 
                     NetworkSingleton.getInstance(HomeScreenActivity.this).addToRequestque(stringRequest); // checks if there is a queue, if there is, puts request to it
-               */
                 }
             }
         });

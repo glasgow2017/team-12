@@ -2,11 +2,13 @@ package com.test.glasgowteam12;
 
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
+
 /**
  * Created by Daumantas on 2017-11-05.
  */
 
-public class Respondent implements Comparable<Respondent>{
+public class Respondent implements Comparable<Respondent>, Serializable{
     static String name;
     static String email;
     static String experience;

@@ -48,13 +48,19 @@ public class Dashboard extends AppCompatActivity {
 
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(20170204, 5),
-                new DataPoint(20170205, 2),
-                new DataPoint(20170206, 8),
-                new DataPoint(20170207, 3),
-                new DataPoint(20170208, 2),
-                new DataPoint(201702030, 1),
+                new DataPoint(1, 5),
+                new DataPoint(2, 2),
+                new DataPoint(3, 8),
+                new DataPoint(4, 3),
+                new DataPoint(5, 2),
+                new DataPoint(6, 1),
         });
+
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(1);
+        graph.getViewport().setMaxX(6);
+
+
         graph.addSeries(series);
 
         ///End dummy data

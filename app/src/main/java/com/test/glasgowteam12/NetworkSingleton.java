@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
@@ -36,7 +37,7 @@ public class NetworkSingleton {
         {
             if(requestQueue==null)
             {
-                requestQueue = Volley.newRequestQueue(mCtx.getApplicationContext());
+                requestQueue = Volley.newRequestQueue(mCtx.getApplicationContext(), new HurlStack(null, ClientSSLSocketFactory.getSocketFactory(mCtx)));
             }
             return requestQueue;
         }

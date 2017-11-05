@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.test.glasgowteam12.R;
+import com.test.glasgowteam12.Respondent;
 import com.test.glasgowteam12.User;
 
 public class LoginActivity extends AppCompatActivity {
@@ -39,34 +40,24 @@ public class LoginActivity extends AppCompatActivity {
                     showAlert("Login failed", "Some fields are missing");
                 } else {
 
-                    /**
-                     * Since we are having issues with setting up the server and the database, we go
-                     * around HTTP request and just feed in dummy data by directly opening required activities passing them dummy data
-                     *
-                     * */
-
-                    // DUMMY DATA TEST
-
-                    // Case user logs in
-                    User user = new User("John", "email@email", "military", "50", "user","Flasbacks");
-                    Intent intent = new Intent(LoginActivity.this ,HomeScreenActivity.class);
-                    intent.putExtra("user", user);
-                    startActivity(intent);
-
-                    //case responder logs in
-
-                    /*
-                    User user = new User("John", "email@email", "military", "50", "user","Flasbacks");
-                    Intent intent = new Intent(LoginActivity.this ,HomeScreenActivity.class);
-                    intent.putExtra("user", user);
-                    startActivity(intent);
-                    */
+                    // HTTTP not working : dummy data
+                    if(emailText.equals("respondent")){
+                        Respondent respondent = new Respondent("me", "email", "exp", "military");
+                        Intent intent = new Intent(LoginActivity.this ,RespondentCallWait.class);
+                        intent.putExtra("respondent", respondent);
+                        startActivity(intent);
+                    } else {
+                        User user = new User("john", "email", "military", "54", "user","help");
+                        Intent intent = new Intent(LoginActivity.this ,HomeScreenActivity.class);
+                        intent.putExtra("user", user);
+                        startActivity(intent);
+                    }
 
 
-                    //////END OF DUMMY DATA TEST
 
-                    /*
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL, new Response.Listener<String>() {
+
+
+                    /*StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             try {
@@ -98,11 +89,6 @@ public class LoginActivity extends AppCompatActivity {
                                         // show HomeScreen
                                         Intent intent = new Intent(LoginActivity.this ,HomeScreenActivity.class);
                                         intent.putExtra("user", user);
-                                        /*
-                                        intent.putExtra("email", emailText);
-                                        intent.putExtra("hereFor", hereFor);
-                                        intent.putExtra("service", service);
-                                        */ /*
                                         startActivity(intent);
 
 
@@ -126,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     })
                     {
-                        protected Map<String, String> getParams()throws AuthFailureError{
+                        protected Map<String, String> getParams()throws AuthFailureError {
                             Map<String,String>params = new HashMap<String, String>();
                             params.put("email",emailText);
                             params.put("password",passwordText);
@@ -138,8 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                             5,
                             5));
 
-                    NetworkSingleton.getInstance(LoginActivity.this).addToRequestque(stringRequest); // checks if there is a queue, if there is, puts request to it
-                */
+                    NetworkSingleton.getInstance(LoginActivity.this).addToRequestque(stringRequest); // checks if there is a queue, if there is, puts request to it*/
                 }
             }
         });

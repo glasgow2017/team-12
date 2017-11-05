@@ -17,7 +17,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     String imHereForText = "";
     String whoIAmText = "";
-    final String REGISTER_URL = "52.214.117.48/register.php";
+    final String REGISTER_URL = "https://52.214.117.48/registration.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,65 +105,57 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     else
                     {
-
-                        //TODO Because of bugs with database we are removing HTTP request and replacing it with dummy data
-                        // start of dummy data
-
-                        showToast("Succesfully registered");
-
-                        ///End of dummy data
-                        /*
                         // Make Network request and send info from inputs to register a person
-                        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
-                                new Response.Listener<String>() {
-                                    @Override
-                                    public void onResponse(String response) {
-                                        try {
-                                            // get response from the server
-                                            JSONArray jsonArray = new JSONArray(response);
-                                            JSONObject jsonObject = jsonArray.getJSONObject(0);
-                                            String code = jsonObject.getString("code");
-
-                                            // check if register was successful
-                                            if(code.equals("register_success")){
-                                                // Registration successfull - show HomeScreen
-                                            } else if(code.equals("register_failed")){
-                                                // registration failed, show alert dialog
-
-                                                showAlert("Error", "Registration failed, please try again");
-                                            }
-
-                                        } catch (JSONException e){
-                                            e.printStackTrace();
-                                        }
-
-                                    }
-                                }, new Response.ErrorListener(){
-                            public void onErrorResponse(VolleyError error){
-                                error.printStackTrace();
-                                showAlert("Network Error", "Network error has occurred, please check your connection");
-                            }
-                        }){
-                            @Override
-                            protected Map<String, String> getParams() throws AuthFailureError {
-                                Map<String,String>params = new HashMap<String, String>();
-
-                                params.put("username",username);
-                                params.put("email",email);
-                                params.put("phone",phone);
-                                params.put("password", password);
-                                params.put("imHereFor", imHereForText);
-                                params.put("whoIAm", whoIAmText);
-
-                                return params;
-                            }
-                        };
-                        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                                5000,
-                                5,
-                                5));
-                        NetworkSingleton.getInstance(RegisterActivity.this).addToRequestque(stringRequest);
-                    */
+//                        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
+//                                new Response.Listener<String>() {
+//                                    @Override
+//                                    public void onResponse(String response) {
+//                                        try {
+//                                            // get response from the server
+//                                            JSONArray jsonArray = new JSONArray(response);
+//                                            JSONObject jsonObject = jsonArray.getJSONObject(0);
+//                                            String code = jsonObject.getString("code");
+//
+//                                            // check if register was successful
+//                                            if(code.equals("register_success")){
+//                                                // Registration successfull - show HomeScreen
+//                                            } else if(code.equals("register_failed")){
+//                                                // registration failed, show alert dialog
+//
+//                                                showAlert("Error", "Registration failed, please try again");
+//                                            }
+//
+//                                        } catch (JSONException e){
+//                                            e.printStackTrace();
+//                                        }
+//
+//                                    }
+//                                }, new Response.ErrorListener(){
+//                            public void onErrorResponse(VolleyError error){
+//                                error.printStackTrace();
+//                                showAlert("Network Error", "Network error has occurred, please check your connection");
+//                            }
+//                        }){
+//                            @Override
+//                            protected Map<String, String> getParams() throws AuthFailureError {
+//                                Map<String,String>params = new HashMap<String, String>();
+//
+//                                params.put("username",username);
+//                                params.put("email",email);
+//                                params.put("phone",phone);
+//                                params.put("password", password);
+//                                params.put("imHereFor", imHereForText);
+//                                params.put("whoIAm", whoIAmText);
+//
+//                                return params;
+//                            }
+//                        };
+//                        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+//                                5000,
+//                                5,
+//                                5));
+//                        NetworkSingleton.getInstance(RegisterActivity.this).addToRequestque(stringRequest);
+//
                     }
                 }
             }

@@ -9,8 +9,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -20,6 +22,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 import com.sinch.android.rtc.Sinch;
 import com.sinch.android.rtc.SinchClient;
 import com.sinch.android.rtc.calling.Call;
@@ -28,6 +33,7 @@ import com.sinch.android.rtc.calling.CallClientListener;
 import com.test.glasgowteam12.CONSTANTS;
 import com.test.glasgowteam12.NetworkSingleton;
 import com.test.glasgowteam12.R;
+import com.test.glasgowteam12.Respondent;
 import com.test.glasgowteam12.SinchCallListener;
 
 import org.json.JSONArray;
@@ -45,16 +51,23 @@ public class RespondentCallWait extends AppCompatActivity {
     Button hangUp;
     SinchClient sinchClient;
     final String SET_PERSON_ONLINE_URL = "";
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_respondent_call_wait);
+        //TODO because of server problems feed in dummy data instead of HTTP request
+
+        //// Beginning Dummy data
+
 
         Intent intent = new Intent();
-        final String email = intent.getExtras().getString("email");
+        Respondent respondent = (Respondent) getIntent().getSerializableExtra("respondent");
+        email = respondent.getEmail();
 
         // initialize sinch client, but do not start it
+
         sinchClient = Sinch.getSinchClientBuilder()
                 .context(this)
                 .userId(email)
@@ -64,6 +77,29 @@ public class RespondentCallWait extends AppCompatActivity {
                 .build();
 
         sinchClient.setSupportCalling(true);
+
+
+        final GraphView graph = (GraphView) findViewById(R.id.dashboard_graph);
+
+        final LinearLayout userStuff = (LinearLayout)findViewById(R.id.userInfo);
+
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
+                new DataPoint(1, 5),
+                new DataPoint(2, 2),
+                new DataPoint(3, 8),
+                new DataPoint(4, 3),
+                new DataPoint(5, 2),
+                new DataPoint(6, 1),
+        });
+
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(1);
+        graph.getViewport().setMaxX(6);
+        graph.addSeries(series);
+
+
+
+
 
         Switch onlineSwitch = (Switch)findViewById(R.id.online);
 
@@ -79,43 +115,40 @@ public class RespondentCallWait extends AppCompatActivity {
                     // TODO because of unknows error in the library "snitch" we are using we cant import it and so I have moved jniLibs
                     // TODO from src/main where they should be to be compiled to src/main/java and I will comment out the code that uses it
 
-                    /*
-                    sinchClient.startListeningOnActiveConnection();
-                    sinchClient.start();
+
                     sinchClient.getCallClient().addCallClientListener(new SinchCallClientListener(RespondentCallWait.this, "respondent"));
-                    */
 
                     // tell database, that this person is now online
-                    //TODO because of server problems feed in dummy data instead of HTTP request
-                    ///Start of Dummy data
-
-                    // end of dummy data
                     if(isChecked){
                         showToast("Online");
+                        userStuff.setVisibility(View.VISIBLE);
                     }else{
                         showToast("Offline");
+                        userStuff.setVisibility(View.GONE);
                     }
 
 
-                   /* changePersonStatusOnline(email, true);*/
+                    // changePersonStatusOnline(email, true);
 
 
                 } else{
-
+                    // hide user info
+                    userStuff.setVisibility(View.GONE);
+                    // the person logged out, hiding all unnecessary info
                     if(sinchClient.isStarted()){
                         // if sinch client was started - destroy it
+
+
                         sinchClient.stopListeningOnActiveConnection();
                         sinchClient.terminate();
+
                     }
 
-                    changePersonStatusOnline(email, false);
+                    // changePersonStatusOnline(email, false);
                 }
 
             }
         });
-
-
-
         hangUp = (Button)findViewById(R.id.endCall);
     }
 
