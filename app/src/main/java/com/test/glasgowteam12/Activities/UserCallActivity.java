@@ -11,12 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.sinch.android.rtc.Sinch;
 import com.sinch.android.rtc.SinchClient;
 import com.sinch.android.rtc.calling.Call;
@@ -30,14 +28,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class UserCallActivity extends AppCompatActivity {
 
     private Call call;
     User user;
     final String PARSE_ONLINE_RESPONDENTS_LIST_URL = "";
+    ArrayList<User> respondents;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,54 +57,64 @@ public class UserCallActivity extends AppCompatActivity {
 
         // parse online helpers list
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, PARSE_ONLINE_RESPONDENTS_LIST_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
 
-                    JSONObject jsonObject = jsonArray.getJSONObject(0);
-                    String code = jsonObject.getString("code");
-                    String userType = jsonObject.getString("userType");
+        JsonArrayRequest dataPointsRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                PARSE_ONLINE_RESPONDENTS_LIST_URL,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Process the JSON
+                        try{
 
-                    // login failed, show dialog
-                    if(code.equals("failure"))
-                    {
-                        showToast("Failed fetching online respondents help");
+
+                            // init respondents ArrayList to store them for sorting
+                            respondents = new ArrayList<>();
+
+                            // Loop through the respondents
+                            for(int i=0;i<response.length();i++){
+                                // Get current json object
+                                JSONObject respondent = response.getJSONObject(i);
+                                // Get the current student (json object) data
+                                String service = respondent.getString("service");
+                                String experience = respondent.getString("experience");
+                                String respEmail = respondent.getString("email");
+                                String name = respondent.getString("name");
+
+                                User resp = new User(name, respEmail, experience, service);
+                                respondents.add(resp);
+                            }
+
+                            // The list of respondents was downloaded, now do sorting
+                            // create a copy for sorting in case we need to revert changes
+                            ArrayList<User> listForSorting = new ArrayList<>(respondents);
+                            for(User resp: listForSorting){
+
+                                // remove respondents from other services
+                                if(!resp.getService().equals(user.getService())){
+                                    listForSorting.remove(resp);
+                                }
+
+                                // check if there are respondents left
+                                if(listForSorting.size()>0){
+
+                                }
+                            }
+
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
                     }
-                    else if(code.equals("success"))
-                    {
-
-
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        // Do something when error occurred
                     }
-                } catch (JSONException e){
-                    e.printStackTrace();
                 }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                showToast("Network error has occurred, check your connection");
-
-            }
-        })
-        {
-            protected Map<String, String> getParams()throws AuthFailureError {
-                Map<String,String>params = new HashMap<String, String>();
-                params.put("email",user.getEmail());
-                params.put("service",user.getService());
-                params.put("age",user.getAge());
-                params.put("hereFor",user.getHereFor());
-                return params;
-            }
-        };
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                5000,
-                5,
-                5));
-
-        NetworkSingleton.getInstance(UserCallActivity.this).addToRequestque(stringRequest); // checks if there is a queue, if there is, puts request to it
+        );
+        NetworkSingleton.getInstance(UserCallActivity.this).addToRequestque(dataPointsRequest); // checks if there is a queue, if there is, puts request to it
 
 
 

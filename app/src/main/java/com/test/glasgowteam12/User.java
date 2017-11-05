@@ -27,6 +27,12 @@ public class User implements Serializable {
         this.hereFor = hereFor;
     }
 
+    public User(String name, String email, String experience, String service) {
+        this.name = name;
+        this.email = email;
+        this.service = service;
+    }
+
     public static String getEmail() {
         return email;
     }
