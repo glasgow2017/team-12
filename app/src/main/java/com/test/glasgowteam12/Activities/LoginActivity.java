@@ -9,22 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.test.glasgowteam12.NetworkSingleton;
 import com.test.glasgowteam12.R;
 import com.test.glasgowteam12.User;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -52,6 +38,34 @@ public class LoginActivity extends AppCompatActivity {
                 if(emailText.equals("")||passwordText.equals("")){
                     showAlert("Login failed", "Some fields are missing");
                 } else {
+
+                    /**
+                     * Since we are having issues with setting up the server and the database, we go
+                     * around HTTP request and just feed in dummy data by directly opening required activities passing them dummy data
+                     *
+                     * */
+
+                    // DUMMY DATA TEST
+
+                    // Case user logs in
+                    User user = new User("John", "email@email", "military", "50", "user","Flasbacks");
+                    Intent intent = new Intent(LoginActivity.this ,HomeScreenActivity.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
+
+                    //case responder logs in
+
+                    /*
+                    User user = new User("John", "email@email", "military", "50", "user","Flasbacks");
+                    Intent intent = new Intent(LoginActivity.this ,HomeScreenActivity.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
+                    */
+
+
+                    //////END OF DUMMY DATA TEST
+
+                    /*
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -88,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                                         intent.putExtra("email", emailText);
                                         intent.putExtra("hereFor", hereFor);
                                         intent.putExtra("service", service);
-                                        */
+                                        */ /*
                                         startActivity(intent);
 
 
@@ -125,6 +139,7 @@ public class LoginActivity extends AppCompatActivity {
                             5));
 
                     NetworkSingleton.getInstance(LoginActivity.this).addToRequestque(stringRequest); // checks if there is a queue, if there is, puts request to it
+                */
                 }
             }
         });
