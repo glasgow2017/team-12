@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.test.glasgowteam12.NetworkSingleton;
 import com.test.glasgowteam12.R;
+import com.test.glasgowteam12.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +38,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     Intent intent;
     TextView text_seekbar1;
     private final String SEND_MOOD_URL = "";
+    User user;
     int currentValue = -1;
     SeekBar seekbar1;
 
@@ -46,9 +48,14 @@ public class HomeScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
 
 
-        Intent intentExtras = getIntent();
+        user = (User)getIntent().getSerializableExtra("user");
+        /*
         Bundle bundleExtras = intentExtras.getExtras();
         final String email = bundleExtras.getString("email");
+        final String hereFor = bundleExtras.getString("hereFor");
+        final String service = bundleExtras.getString("service");
+        */
+
 
 
         Button helpButton = (Button)findViewById(R.id.HelpButton);
@@ -57,7 +64,14 @@ public class HomeScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeScreenActivity.this, UserCallActivity.class);
+                intent.putExtra("user", user);
+
+
+                /*
                 intent.putExtra("email", email);
+                intent.putExtra("hereFor", email);
+                intent.putExtra("service", email);
+                */
                 startActivity(intent);
             }
         });
@@ -136,7 +150,7 @@ public class HomeScreenActivity extends AppCompatActivity {
                             Map<String,String>params = new HashMap<String, String>();
                             params.put("date",todayString);
                             params.put("mood",String.valueOf(currentValue));
-                            params.put("email", email);
+                            params.put("email", User.getEmail());
                             return params;
                         }
                     };

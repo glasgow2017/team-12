@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.test.glasgowteam12.NetworkSingleton;
 import com.test.glasgowteam12.R;
+import com.test.glasgowteam12.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,6 +61,10 @@ public class LoginActivity extends AppCompatActivity {
                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
                                 String code = jsonObject.getString("code");
                                 String userType = jsonObject.getString("userType");
+                                String hereFor = jsonObject.getString("hereFor");
+                                String service = jsonObject.getString("service");
+                                String name = jsonObject.getString("name");
+                                String age = jsonObject.getString("age");
 
                                 // login failed, show dialog
                                 if(code.equals("login_failed"))
@@ -69,10 +74,24 @@ public class LoginActivity extends AppCompatActivity {
                                 else if(code.equals("login_success"))
                                 {
                                     if (userType.equals("user")) {
-                                        // login succesful, show HomeScreen
+
+                                        // login succesful
+                                        // Create User object
+
+                                        User user = new User(name, emailText, service, age, userType,hereFor);
+
+
+                                        // show HomeScreen
                                         Intent intent = new Intent(LoginActivity.this ,HomeScreenActivity.class);
+                                        intent.putExtra("user", user);
+                                        /*
                                         intent.putExtra("email", emailText);
+                                        intent.putExtra("hereFor", hereFor);
+                                        intent.putExtra("service", service);
+                                        */
                                         startActivity(intent);
+
+
                                     } else {
                                         Intent intent = new Intent(LoginActivity.this ,RespondentCallActivity.class);
                                         intent.putExtra("email", emailText);
