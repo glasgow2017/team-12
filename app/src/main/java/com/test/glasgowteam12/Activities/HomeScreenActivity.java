@@ -1,14 +1,25 @@
 package com.test.glasgowteam12.Activities;
 
 import android.content.Intent;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.test.glasgowteam12.R;
+
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
 
 public class HomeScreenActivity extends AppCompatActivity {
 
@@ -16,6 +27,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     TextView text_seekbar1;
     int currentValue;
     SeekBar seekbar1;
+    Button submitResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,15 +36,16 @@ public class HomeScreenActivity extends AppCompatActivity {
 
 
         text_seekbar1 = (TextView) findViewById(R.id.text_seekBar1);
+        submitResults = (Button) findViewById(R.id.submitResults);
+
         seekbar1 = (SeekBar) findViewById(R.id.seekBar1);
-
-
-
         seekbar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 currentValue = progress;
                 text_seekbar1.setText(Integer.toString(currentValue) + "/10");
+
             }
 
             @Override
@@ -45,6 +58,24 @@ public class HomeScreenActivity extends AppCompatActivity {
 
             }
         });
+        intent = new Intent(HomeScreenActivity.this, Dashboard.class);
+
+        submitResults.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh-mm");
+                String format = simpleDateFormat.format(new Date());
+                Log.d("MainActivity", "Current Timestamp: " + format);
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("seekBarValue1", currentValue);
+                bundle.putString("currentTimestamp", format);
+                intent.putExtras(bundle);
+            }
+        });
+
 
 
     }
@@ -63,14 +94,7 @@ public class HomeScreenActivity extends AppCompatActivity {
 
         if (id == R.id.dashboard_button) {
             // do something here
-
-
-            intent = new Intent(HomeScreenActivity.this, Dashboard.class);
-            Bundle bundle = new Bundle();
-            bundle.putInt("seekBarValue1", currentValue);
-            intent.putExtras(bundle);
             startActivity(intent);
-
         }
         return super.onOptionsItemSelected(item);
     }
