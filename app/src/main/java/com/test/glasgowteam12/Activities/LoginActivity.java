@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
     String emailText;
     String passwordText;
-    final String LOGIN_URL = "";
+    final String LOGIN_URL = "52.214.117.48/login.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

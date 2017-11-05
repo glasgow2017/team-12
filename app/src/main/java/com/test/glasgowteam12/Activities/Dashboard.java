@@ -106,6 +106,8 @@ public class Dashboard extends AppCompatActivity {
 
         // this line adds the data of your EditText and puts in your array
 
+        // what is this..?
+        /*
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
         arrayList.add("Mood:5");
         arrayList.add("Mood:8");
@@ -117,6 +119,7 @@ public class Dashboard extends AppCompatActivity {
         }
 
         adapter.notifyDataSetChanged();
+    */
 
     }
 

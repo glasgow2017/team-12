@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     String imHereForText = "";
     String whoIAmText = "";
-    final String REGISTER_URL = "";
+    final String REGISTER_URL = "52.214.117.48/register.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

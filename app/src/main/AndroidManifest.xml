@@ -2,6 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.test.glasgowteam12">
 
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,21 +19,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.HomeScreenActivity"/>
+        <activity android:name=".Activities.HomeScreenActivity" />
         <activity android:name=".Activities.Dashboard" />
         <activity android:name=".Activities.RegisterActivity" />
         <activity android:name=".Activities.MainActivity" />
-        <activity android:name=".Activities.LoginActivity" >
+        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Activities.InitialActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.InitialActivity" />
         <activity android:name=".Activities.UserCallActivity" />
         <activity android:name=".Activities.RespondentCallWait" />
-        <activity android:name=".Activities.RespondentCallActivity"></activity>
+        <activity android:name=".Activities.RespondentCallActivity" />
+        <activity android:name=".Activities.UserCallWaitActivity"></activity>
     </application>
 
 </manifest>
