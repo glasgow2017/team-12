@@ -1,17 +1,25 @@
 package com.test.glasgowteam12.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import com.test.glasgowteam12.R;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.test.glasgowteam12.NetworkSingleton;
+import com.test.glasgowteam12.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -19,6 +27,8 @@ public class Dashboard extends AppCompatActivity {
 
     private ListView list;
     private ArrayList<String> arrayList = new ArrayList<>();
+    private String FetchGraphPoints_URL = "";
+
 
     private ArrayAdapter<String> adapter;
 
@@ -38,17 +48,57 @@ public class Dashboard extends AppCompatActivity {
             System.out.println("dashboard" + seekbarValue1);
         }
 
-        /* Initialise graph of user mood points */
-        /* TODO:  pull in external data for moods associated with user */
-        GraphView graph = (GraphView) findViewById(R.id.dashboard_graph);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
-        });
-        graph.addSeries(series);
+        final GraphView graph = (GraphView) findViewById(R.id.dashboard_graph);
+
+        /* pull in external data for moods associated with user */
+        JsonArrayRequest dataPointsRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                FetchGraphPoints_URL,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+
+                        // Process the JSON
+                        try{
+                            // Init DataPoints Array of required length
+
+                            DataPoint[] dataPointsArray = new DataPoint[response.length() - 1];
+
+                            // Loop through the array elements
+                            for(int i=0;i<response.length();i++){
+                                // Get current json object
+                                JSONObject graphPoint = response.getJSONObject(i);
+
+                                // Get the current student (json object) data
+                                String date = graphPoint.getString("date");
+                                String mood = graphPoint.getString("mood");
+
+                                dataPointsArray[i] = new DataPoint(Double.parseDouble(date.replace("-","")), Double.parseDouble(mood));
+                            }
+
+
+                            /* Initialise graph of user mood points */
+
+                            LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPointsArray);
+                            graph.addSeries(series);
+
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        // Do something when error occurred
+                    }
+                }
+        );
+        NetworkSingleton.getInstance(Dashboard.this).addToRequestque(dataPointsRequest); // checks if there is a queue, if there is, puts request to it
+
 
         /*Add values to list view */
         list = (ListView) findViewById(R.id.dashboard_log_list);
