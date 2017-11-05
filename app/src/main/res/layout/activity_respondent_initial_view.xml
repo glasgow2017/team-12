@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.test.glasgowteam12.Activities.respondentInitialView">
+
+    <Switch
+        android:id="@+id/Availability"
+        android:layout_width="208dp"
+        android:layout_height="122dp"
+        android:text="Go Online"
+        android:textAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
+        android:trackTint="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@+id/groupDiscussionButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/greetingText"
+        app:layout_constraintVertical_bias="0.195" />
+
+    <Button
+        android:id="@+id/groupDiscussionButton"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:text="View Group Discussion"
+        android:textAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Availability"
+        app:layout_constraintVertical_bias="0.201" />
+
+    <Button
+        android:id="@+id/newsfeedButton"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:text="View Newsfeed"
+        android:textAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="344dp" />
+
+    <Button
+        android:id="@+id/settingsButton"
+        style="@style/Widget.AppCompat.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:text="Settings"
+        android:textAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="511dp" />
+
+    <TextView
+        android:id="@+id/greetingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text='"Who are you going to help today?"'
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.SearchResult.Title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="79dp" />
+
+
+</android.support.constraint.ConstraintLayout>

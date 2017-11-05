@@ -1,25 +1,17 @@
 package com.test.glasgowteam12.Activities;
 
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import com.test.glasgowteam12.R;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-import com.test.glasgowteam12.NetworkSingleton;
-import com.test.glasgowteam12.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -27,8 +19,6 @@ public class Dashboard extends AppCompatActivity {
 
     private ListView list;
     private ArrayList<String> arrayList = new ArrayList<>();
-    private String FetchGraphPoints_URL = "";
-
 
     private ArrayAdapter<String> adapter;
 
@@ -83,6 +73,15 @@ public class Dashboard extends AppCompatActivity {
 
                             LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPointsArray);
                             graph.addSeries(series);
+
+        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getApplicationContext()));
+        graph.getGridLabelRenderer().setNumHorizontalLabels(3);
+
+        graph.getViewport().setMinX(d1.getTime());
+        graph.getViewport().setMaxX(d3.getTime());
+        graph.getViewport().setXAxisBoundsManual(true);
+
+        graph.getGridLabelRenderer().setHumanRounding(false);
 
 
                         }catch (JSONException e){
