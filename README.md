@@ -1,7 +1,7 @@
 # team-12
 # Code For Good
 
-One Paragraph of project description goes here
+An Android app to support people with PTSD by providing a 24/7 respond-to-user service and mood tracking functionality.
 
 ## Getting Started
 
@@ -17,7 +17,7 @@ Give examples
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
+This project has been developed and tested on Android v7.1.1 (Marshmallow, API25).
 
 Say what the step will be
 
@@ -45,13 +45,9 @@ Add additional notes about how to deploy this on a live system
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
- 
-## Authors
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/glasgow2017/team-12/contributors) who participated in this project.
 
 ## License
 
@@ -60,5 +56,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * JP Morgan Code For Good 43 at Glasgow
-* Who Dares Cares
+* [Who Dares Cares] (https://www.facebook.com/wdw22/)
 
