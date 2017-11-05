@@ -8,12 +8,13 @@
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="395dp"
+        android:layout_height="46dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="72dp"
+        android:text="1.	Recurrent thoughts or memories of the terrifying events"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="2dp" />
 
     <RadioButton
@@ -50,12 +51,13 @@
 
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="72dp"
+        android:text="2.	Feeling as though the event is happening again "
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:layout_editor_absoluteX="3dp"
         tools:layout_editor_absoluteY="79dp" />
 
     <RadioButton
@@ -92,12 +94,13 @@
 
     <EditText
         android:id="@+id/editText3"
-        android:layout_width="wrap_content"
+        android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="58dp"
+        android:text="3.	Recurrent nightmares"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="193dp" />
 
     <RadioButton
@@ -134,12 +137,13 @@
 
     <EditText
         android:id="@+id/editText4"
-        android:layout_width="wrap_content"
+        android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="58dp"
+        android:text="4.	Feeling detached or withdrawn from other people "
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="302dp" />
 
     <RadioButton
@@ -174,16 +178,6 @@
         tools:layout_editor_absoluteX="214dp"
         tools:layout_editor_absoluteY="346dp" />
 
-    <EditText
-        android:id="@+id/editText5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="46dp"
-        tools:layout_editor_absoluteY="378dp" />
-
     <RadioButton
         android:id="@+id/line 5 button 1"
         android:layout_width="wrap_content"
@@ -215,5 +209,16 @@
         android:text="4"
         tools:layout_editor_absoluteX="223dp"
         tools:layout_editor_absoluteY="423dp" />
+
+    <EditText
+        android:id="@+id/editText6"
+        android:layout_width="399dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="5.	Unable to feel emotions "
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="394dp" />
 
 </android.support.constraint.ConstraintLayout>
